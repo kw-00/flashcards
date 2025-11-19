@@ -22,9 +22,8 @@ function App() {
   return (
     <>
       <div className="themed vcontainer">
-        <div className='themed visible'>Taskbar</div>
         <div className='themed hcontainer'>
-          <div className='themed visible'>Sidebar</div>
+          <div></div>
           {/** Quiz container */}
           <div className="themed cardContainer">
             {/** Question */}
@@ -55,10 +54,7 @@ function App() {
               </button>
             </div>
           </div>
-          <div className='themed visible'>Hello</div>
-        </div>
-        <div className='themed visible'>
-          Status Bar
+          <div></div>
         </div>
       </div>
 
