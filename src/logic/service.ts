@@ -28,8 +28,8 @@ export async function loadQuizFromFile(file: File): Promise<Quiz> {
     const text = await file.text()
 
     const questions = text
-        .split(/[\n\r]{3,}/)
-        .map(question => question.split(/[,]{2}/))
+        .split(/;;[\n\r]/)
+        .map(question => question.split(/,,/))
         .map(qa => {
             return {q: qa[0], a: qa[1]}
         })

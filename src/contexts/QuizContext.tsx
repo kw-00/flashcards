@@ -54,10 +54,13 @@ export function QuizProvider({children}: { children: React.ReactNode}) {
         if (quiz === null) {
             return null
         }
-        const questionsToChooseFrom = without(range(quiz.questions.length), maxQuestionsInMemory)
+        const questionsToChooseFrom = without(range(quiz.questions.length), ...questionMemory)
         const chosenIndex = sample(questionsToChooseFrom)!
         setQuestionMemory(questionMemory.concat([chosenIndex]))
+
+        console.log("In memory" + questionMemory)
         if (questionMemory.length > maxQuestionsInMemory) {
+            console.log("Removed question from memory.")
             setQuestionMemory(questionMemory.filter((_, n) => n != 0))
         }
         setQuestion(quiz.questions[chosenIndex])
