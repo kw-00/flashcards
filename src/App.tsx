@@ -1,15 +1,18 @@
-import { useState, type MouseEvent } from 'react'
-import { getQuestion, pickRandomQuestion } from './logic/service'
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import FlashCardPage from './pages/FlashCardPage'
+import FlashCardPage from './pages/QuizPage'
+import { Provider } from './components/ui/provider'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<FlashCardPage/>}></Route>
-      </Routes>
-    </BrowserRouter>
+    <Provider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<FlashCardPage/>}></Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
+
   )
 }
 
