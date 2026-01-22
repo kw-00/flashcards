@@ -25,8 +25,7 @@ export function QuizProvider({children}: { children: React.ReactNode}) {
 
     const loadAndSetQuizNames = () => {
         loadQuizNames((namesOrError) => {
-            console.log(namesOrError)
-            if (!Array.isArray(namesOrError)) {
+                        if (!Array.isArray(namesOrError)) {
                 alert(namesOrError)
                 return
             }
@@ -34,12 +33,36 @@ export function QuizProvider({children}: { children: React.ReactNode}) {
         })
     }
 
+    // Loads quiz from DB
+    const loadQuizFromDB = (name: string) => {
+        loadQuiz(name, (quizOrErrorMessage) => {
+            if (typeof quizOrErrorMessage === "string") {
+                alert(quizOrErrorMessage)
+            }
+            setQuiz(quizOrErrorMessage as Quiz)
+            localStorage.setItem("lastQuiz", name)
+        })
+    }
+
+    // Uploads quiz from a file
+    const uploadQuiz = async (file: File) => {
+        const quiz = await loadQuizFromFile(file)
+                cacheQuiz(quiz, () => loadAndSetQuizNames())
+    }
+
     useEffect(() => {
         // Load all quiz names from DB
         loadAndSetQuizNames()
 
         // Set a default quiz to start with
-        setQuiz({name: "Node.js Quiz", questions: questions})
+        const lastQuiz = localStorage.getItem("lastQuiz")
+        if (lastQuiz) {
+            loadQuizFromDB(lastQuiz)
+        } else {
+            const quiz: Quiz = {name: "Node.js Quiz", questions: questions}
+            setQuiz({name: "Node.js Quiz", questions: questions})
+            cacheQuiz(quiz, e => {if (e) alert(e)})
+        }
         nextQuestion()
     }, [])
 
@@ -58,29 +81,10 @@ export function QuizProvider({children}: { children: React.ReactNode}) {
         const chosenIndex = sample(questionsToChooseFrom)!
         setQuestionMemory(questionMemory.concat([chosenIndex]))
 
-        console.log("In memory" + questionMemory)
-        if (questionMemory.length > maxQuestionsInMemory) {
-            console.log("Removed question from memory.")
-            setQuestionMemory(questionMemory.filter((_, n) => n != 0))
+                if (questionMemory.length > maxQuestionsInMemory) {
+                        setQuestionMemory(questionMemory.filter((_, n) => n != 0))
         }
         setQuestion(quiz.questions[chosenIndex])
-    }
-
-    // Loads quiz from DB
-    const loadQuizFromDB = (name: string) => {
-        loadQuiz(name, (quizOrErrorMessage) => {
-            if (typeof quizOrErrorMessage === "string") {
-                alert(quizOrErrorMessage)
-            }
-            setQuiz(quizOrErrorMessage as Quiz)
-        })
-    }
-
-    // Uploads quiz from a file
-    const uploadQuiz = async (file: File) => {
-        const quiz = await loadQuizFromFile(file)
-        console.log(quiz)
-        cacheQuiz(quiz, () => loadAndSetQuizNames())
     }
 
 

@@ -12,8 +12,8 @@ export default function QuizList(props: StackProps) {
     return (
         <VStack {...props}>
             <VStack>
-                {quizNames.map((name) => {
-                    return <QuizListElement quizName={name} onClick={() => loadQuizFromDB(name)}/>
+                {quizNames.map((name, n) => {
+                    return <QuizListElement key={n} quizName={name} onClick={() => loadQuizFromDB(name)}/>
                 })}
             </VStack>
             <QuizUpload onFileAccept={(details) => uploadQuiz(details.files[0])}/>

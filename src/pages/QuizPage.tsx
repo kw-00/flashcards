@@ -1,6 +1,6 @@
 import { HStack } from '@chakra-ui/react'
 import { QuizProvider } from '@/contexts/QuizContext'
-import Quiz from '@/components/quiz'
+import Quiz from '@/components/Quiz'
 import QuizList from '@/components/QuizList'
 
 function App() {

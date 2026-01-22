@@ -14,13 +14,11 @@ export type Question = {
 }
 
 const onUpgradeNeeded = (e: IDBVersionChangeEvent) => {
-    console.log("Upgrade")
-    const db = (e.target as IDBOpenDBRequest).result
-    if (!db.objectStoreNames.contains(QUIZ_STORE_NAME)) {
-        db.createObjectStore(QUIZ_STORE_NAME, {keyPath: "name", autoIncrement: false})
+        const db = (e.target as IDBOpenDBRequest).result
+        if (!db.objectStoreNames.contains(QUIZ_STORE_NAME)) {
+            db.createObjectStore(QUIZ_STORE_NAME, {keyPath: "name", autoIncrement: false})
+        }
     }
-    console.log("Created store")
-}
 
 
 export async function loadQuizFromFile(file: File): Promise<Quiz> {

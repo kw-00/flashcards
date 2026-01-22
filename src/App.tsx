@@ -1,6 +1,6 @@
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import FlashCardPage from './pages/QuizPage'
+import QuizPage from './pages/QuizPage'
 import { Provider } from './components/ui/provider'
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <Provider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<FlashCardPage/>}></Route>
+          <Route path="/" element={<QuizPage/>}></Route>
         </Routes>
       </BrowserRouter>
     </Provider>
