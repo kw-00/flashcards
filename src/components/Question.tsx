@@ -19,7 +19,13 @@ export default function Question({question, showAnswer, ...rest}: QuestionProps)
                 </Card.Header>
                 <Card.Body>
                     <Card.Description>
-                        {question ? question.q : "No question selected."} 
+                        {question 
+                        ? 
+                        <>
+                            <p>{question.q.split("\n", 2)[0]}</p>
+                            <p>{question.q.split("\n", 2)[1]}</p>
+                        </> 
+                        : "No question selected."} 
                     </Card.Description>
                 </Card.Body>
             </Card.Root>

@@ -59,8 +59,8 @@ export function QuizProvider({children}: { children: React.ReactNode}) {
         if (lastQuiz) {
             loadQuizFromDB(lastQuiz)
         } else {
-            const quiz: Quiz = {name: "Node.js Quiz", questions: questions}
-            setQuiz({name: "Node.js Quiz", questions: questions})
+            const quiz: Quiz = {name: "Diploma quiz", questions: questions}
+            setQuiz({name: "Diploma quiz", questions: questions})
             cacheQuiz(quiz, e => {if (e) alert(e)})
         }
         nextQuestion()
